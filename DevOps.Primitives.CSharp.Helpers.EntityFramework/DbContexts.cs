@@ -1,27 +1,31 @@
 ﻿using DevOps.Primitives.CSharp.Helpers.Common;
-using Humanizer;
-using System.Linq;
+using System.Collections.Generic;
 
 namespace DevOps.Primitives.CSharp.Helpers.EntityFramework
 {
     public static class DbContexts
     {
-        public static Property GetDbSetProperty(string entityType, string propertyName = null)
-            => Properties.Public(
-                GetDbSetPropertyName(entityType, propertyName),
-                GetDbSetPropertyType(entityType));
+        private const string DbContext = nameof(DbContext);
 
-        public static Statement GetUniqueIndexStatement(string type, params string[] fields)
-            => new Statement($"modelBuilder.Entity<{type}>().HasIndex(e => new {{ {GetUniqueIndexFields(fields)} }}).IsUnique();");
+        public static ClassDeclaration Create(string typeName, string @namespace, IEnumerable<DbContextProperty> properties, string baseType = DbContext, IEnumerable<UniqueIndex> uniqueIndexes = null)
+            => new ClassDeclaration(
+                typeName,
+                @namespace,
+                ModifierLists.Public,
+                usingDirectiveList: DbContextUsings.Create(properties, @namespace),
+                baseList: GetBaseList(baseType),
+                constructorList: GetConstructorList(typeName),
+                propertyList: DbContextPropertyLists.Create(properties),
+                methodList: GetMethodList(uniqueIndexes));
 
-        private static string GetDbSetPropertyName(string entityType, string propertyName)
-            => string.IsNullOrWhiteSpace(propertyName) ? entityType.Pluralize(false) : propertyName;
+        private static BaseList GetBaseList(string baseType)
+            => BaseLists.Create(new BaseType(baseType));
 
-        private static string GetDbSetPropertyType(string entityType)
-            => $"DbSet<{entityType}>";
+        private static ConstructorList GetConstructorList(string typeName)
+            => ConstructorLists.Create(
+                DbContextConstructors.Create(typeName));
 
-        private static string GetUniqueIndexFields(params string[] fields)
-            => string.Join(", ",
-                fields.OrderBy(f => f).Select(f => $"e.{f}"));
+        private static MethodList GetMethodList(IEnumerable<UniqueIndex> uniqueIndexes)
+            => uniqueIndexes == null ? null : MethodLists.Create(DbContextOnModelCreating.Create(uniqueIndexes));
     }
 }

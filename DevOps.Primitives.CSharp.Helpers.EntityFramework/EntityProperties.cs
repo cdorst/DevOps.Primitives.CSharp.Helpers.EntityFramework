@@ -5,6 +5,9 @@ namespace DevOps.Primitives.CSharp.Helpers.EntityFramework
 {
     public static class EntityProperties
     {
+        public static Property Member(EntityProperty property, int protobufTag)
+            => Member(property.Name, property.Type, property.SummaryComment, protobufTag);
+
         public static Property Member(string name, string type, string comment, int protobufTag)
             => Properties.Public(name, type, comment, EntityPropertyAttributes.Member(protobufTag));
 
@@ -14,6 +17,9 @@ namespace DevOps.Primitives.CSharp.Helpers.EntityFramework
                 type,
                 GetKeyComment(entityType),
                 EntityPropertyAttributes.PrimaryKey());
+
+        public static IEnumerable<Property> Reference(EntityProperty property, int protobufTag)
+            => Reference(property.Type, protobufTag, property.ReferenceInfo.KeyType, property.Name);
 
         public static IEnumerable<Property> Reference(string type, int protobufTag, string keyType = TypeConstants.IntNullable, string propertyName = null)
         {
