@@ -8,9 +8,15 @@ namespace DevOps.Primitives.CSharp.Helpers.EntityFramework
     {
         private const string EfCoreNamespace = "Microsoft.EntityFrameworkCore";
 
-        public static UsingDirectiveList Create(IEnumerable<DbContextProperty> properties, string dbContextNamespace)
+        public static UsingDirectiveList Create(
+            IEnumerable<DbContextProperty> properties,
+            string dbContextNamespace,
+            IEnumerable<string> additionalUsings = null)
             => UsingDirectiveLists.Create(
-                GetUsings(properties).Where(u => u != dbContextNamespace).ToArray());
+                GetUsings(properties)
+                    .Where(u => u != dbContextNamespace)
+                    .Union(additionalUsings ?? new string[] { })
+                    .ToArray());
 
         private static HashSet<string> GetUsings(IEnumerable<DbContextProperty> properties)
         {
