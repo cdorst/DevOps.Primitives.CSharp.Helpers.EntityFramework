@@ -5,11 +5,11 @@ namespace DevOps.Primitives.CSharp.Helpers.EntityFramework
     public static class DbContextProperties
     {
         public static Property Create(DbContextProperty property)
-            => Create(property.TypeName, property.PropertyNameOverride);
+            => Create(property.SqlSchema, property.SqlTableName, property.TypeName, property.PropertyNameOverride);
 
-        public static Property Create(string entityType, string propertyName = null)
+        public static Property Create(string schema, string table, string entityType, string propertyName = null)
             => Properties.Public(
-                NameHelper.GetNamePlural(entityType, propertyName),
-                $"DbSet<{entityType}>");
+                name: $"{schema}_{table}",
+                type: $"DbSet<{entityType}>");
     }
 }
