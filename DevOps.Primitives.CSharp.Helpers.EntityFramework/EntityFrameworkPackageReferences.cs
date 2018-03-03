@@ -10,10 +10,5 @@ namespace DevOps.Primitives.CSharp.Helpers.EntityFramework
             yield return PackageReferences.MicrosoftEntityFrameworkCore();
             yield return PackageReferences.ProtobufNet();
         }
-
-        public static IEnumerable<NuGetReference> GetUniqueStringsDatabaseReferences()
-        {
-            yield return PackageReferences.CDorstDevOpsPrimitivesStrings();
-        }
     }
 }
