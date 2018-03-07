@@ -1,5 +1,6 @@
 ﻿using DevOps.Primitives.NuGet;
 using System.Collections.Generic;
+using static DevOps.Primitives.CSharp.Helpers.EntityFramework.PackageReferences;
 
 namespace DevOps.Primitives.CSharp.Helpers.EntityFramework
 {
@@ -7,8 +8,8 @@ namespace DevOps.Primitives.CSharp.Helpers.EntityFramework
     {
         public static IEnumerable<NuGetReference> GetEntityFrameworkCoreReferences()
         {
-            yield return PackageReferences.MicrosoftEntityFrameworkCore();
-            yield return PackageReferences.ProtobufNet();
+            yield return MicrosoftEntityFrameworkCore();
+            yield return ProtobufNet();
         }
     }
 }

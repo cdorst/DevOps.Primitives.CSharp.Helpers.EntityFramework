@@ -6,6 +6,10 @@ namespace DevOps.Primitives.CSharp.Helpers.EntityFramework
 {
     public static class EntityUsings
     {
+        public const string DevOpsCodeEntityModelCommonInterfacesEntity = "DevOps.Code.EntityModel.Common.Interfaces.Entity";
+        public const string System = "System";
+        public const string SystemLinqExpressions = "System.Linq.Expressions";
+
         private const string ProtoBuf = nameof(ProtoBuf);
         private const string SystemComponentModelDataAnnotations = "System.ComponentModel.DataAnnotations";
         private const string SystemComponentModelDataAnnotationsSchema = "System.ComponentModel.DataAnnotations.Schema";
@@ -22,7 +26,8 @@ namespace DevOps.Primitives.CSharp.Helpers.EntityFramework
                 SystemComponentModelDataAnnotations,
                 SystemComponentModelDataAnnotationsSchema
             };
-            foreach (var @using in usings) if (!string.IsNullOrWhiteSpace(@using)) set.Add(@using);
+            foreach (var @using in usings)
+                if (!string.IsNullOrWhiteSpace(@using)) set.Add(@using);
             return set.ToArray();
         }
     }
