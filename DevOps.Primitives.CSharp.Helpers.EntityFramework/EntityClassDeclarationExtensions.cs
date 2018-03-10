@@ -13,9 +13,9 @@ namespace DevOps.Primitives.CSharp.Helpers.EntityFramework
             string keyType,
             int typeId)
             => @class
-                .WithBase(IEntity)
+                .WithBase(IEntity, TypeArgumentLists.Create(keyType))
                 .WithMethods(
-                    GetEntityType(keyType, typeId),
+                    GetEntityType(typeId),
                     GetKey(keyType, $"{@class.Identifier.Name.Value}Id"))
                 .WithUsingDirective(DevOpsCodeEntityModelCommonInterfacesEntity);
 
