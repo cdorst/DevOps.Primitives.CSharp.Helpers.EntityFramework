@@ -5,6 +5,9 @@ namespace DevOps.Primitives.CSharp.Helpers.EntityFramework
 {
     public static class EntityProperties
     {
+        public static EntityProperty Create(string name, string type, string comment, string typeNamespace = null, string referenceKeyType = null)
+            => new EntityProperty(name, type, comment, typeNamespace, referenceKeyType);
+
         public static Property Member(EntityProperty property, int protobufTag)
             => Member(property.Name, property.Type, property.SummaryComment, protobufTag);
 

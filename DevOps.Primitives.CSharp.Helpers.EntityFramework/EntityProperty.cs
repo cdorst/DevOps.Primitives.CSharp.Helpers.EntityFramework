@@ -5,6 +5,20 @@ namespace DevOps.Primitives.CSharp.Helpers.EntityFramework
 {
     public class EntityProperty
     {
+        public EntityProperty() { }
+        public EntityProperty(string name, string type, string comment, string typeNamespace = null, EntityPropertyReferenceInfo referenceInfo = null)
+        {
+            Name = name;
+            ReferenceInfo = referenceInfo;
+            SummaryComment = comment;
+            Type = type;
+            TypeNamespace = typeNamespace;
+        }
+        public EntityProperty(string name, string type, string comment, string typeNamespace = null, string referenceKeyType = null)
+            : this(name, type, comment, typeNamespace, string.IsNullOrEmpty(referenceKeyType) ? null : new EntityPropertyReferenceInfo { KeyType = referenceKeyType })
+        {
+        }
+
         public string Name { get; set; }
         public EntityPropertyReferenceInfo ReferenceInfo { get; set; }
         public string SummaryComment { get; set; }
