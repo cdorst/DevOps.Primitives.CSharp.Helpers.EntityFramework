@@ -10,7 +10,7 @@
     <Description>Helpers for building Entity Framework entities and DbContext types</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>CDorst.DevOps.Primitives.CSharp.Helpers.EntityFramework</PackageId>
-    <Version>3.1.1</Version>
+    <Version>3.1.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
