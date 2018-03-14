@@ -10,6 +10,7 @@ namespace DevOps.Primitives.CSharp.Helpers.EntityFramework
             => new ClassDeclaration(name, @namespace,
                 ModifierLists.Public,
                 GetUsingDirectiveList(properties),
+                Comments.Summary("Represents uniquely identifiable {name} records. Manage object persistence with EntityFrameworkCore DbContext"),
                 attributeListCollection: EntityAttributes.Create(name, tableSchema, tableName),
                 constructorList: EntityConstructorLists.Create(name, properties),
                 propertyList: EntityPropertyLists.Create(name, properties, primaryKeyType));
