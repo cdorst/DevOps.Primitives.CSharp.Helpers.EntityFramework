@@ -10,12 +10,12 @@
     <Description>Helpers for building Entity Framework entities and DbContext types</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>CDorst.DevOps.Primitives.CSharp.Helpers.EntityFramework</PackageId>
-    <Version>2.3.3</Version>
+    <Version>2.3.4</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="CDorst.Common.Functions.CheckNullableEnumerationForAnyElements" Version="1.0.0" />
-    <PackageReference Include="CDorst.DevOps.Primitives.CSharp.Helpers.Common" Version="3.8.4" />
+    <PackageReference Include="CDorst.DevOps.Primitives.CSharp.Helpers.Common" Version="3.8.5" />
     <PackageReference Include="Humanizer.Core" Version="2.2.0" />
   </ItemGroup>
 
