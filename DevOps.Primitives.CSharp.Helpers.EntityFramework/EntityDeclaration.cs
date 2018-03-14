@@ -31,7 +31,7 @@ namespace DevOps.Primitives.CSharp.Helpers.EntityFramework
                 : Entities.Static(this);
 
         public string TableName => Name.Pluralize();
-        public string TableSchema => Namespace.Replace(".", string.Empty);
+        public string TableSchema => Namespace.Replace('.', '_');
         public string GetKeyString()
         {
             switch (KeyType ?? Keys.Int)

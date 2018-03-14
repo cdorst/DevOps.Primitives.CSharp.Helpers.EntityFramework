@@ -22,11 +22,9 @@ namespace DevOps.Primitives.CSharp.Helpers.EntityFramework
         public static ClassDeclaration ImplementIStaticEntity(
             this ClassDeclaration @class,
             string keyType,
-            int typeId,
             IEnumerable<EntityProperty> properties)
             => @class
-                .ImplementIEntity(keyType, typeId)
-                .WithSingleBaseType(IStaticEntity)
+                .WithSingleBaseType(IStaticEntity, TypeArgumentLists.Create(keyType))
                 .WithMethod(GetUniqueIndex(@class.Identifier.Name.Value, properties))
                 .WithUsings(
                     EntityUsings.System,

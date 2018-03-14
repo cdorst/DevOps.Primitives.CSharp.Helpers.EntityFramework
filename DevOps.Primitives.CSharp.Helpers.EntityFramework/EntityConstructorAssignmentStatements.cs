@@ -9,6 +9,6 @@
             => Assignment(argument.Name);
 
         private static string GetAssignment(string name)
-            => $"{name} = {name.WithLoweredFirstChar()}";
+            => $"{name} = {name.WithLoweredFirstChar()};";
     }
 }

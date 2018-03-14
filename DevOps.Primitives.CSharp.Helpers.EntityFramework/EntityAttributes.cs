@@ -7,7 +7,7 @@ namespace DevOps.Primitives.CSharp.Helpers.EntityFramework
         public static AttributeListCollection Create(string name, string tableSchema = null, string tableName = null)
             => AttributeLists.Create(
                 Attributes.ProtoContract(),
-                GetTableAttribute(name, tableSchema, tableSchema));
+                GetTableAttribute(name, tableSchema, tableName));
 
         private static Attribute GetTableAttribute(string name, string tableSchema = null, string tableName = null)
             => Attributes.Table(
