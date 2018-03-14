@@ -23,7 +23,7 @@ namespace DevOps.Primitives.CSharp.Helpers.EntityFramework
 
         public static ClassDeclaration Static(string name, string @namespace, IEnumerable<EntityProperty> properties, string tableSchema, string tableName, int typeId, string primaryKeyType = TypeConstants.Int)
             => Create(name, @namespace, properties, tableSchema, tableName, primaryKeyType)
-                .ImplementIStaticEntity(primaryKeyType, properties);
+                .ImplementIStaticEntity(primaryKeyType, typeId, properties);
 
         public static ClassDeclaration Static(EntityDeclaration declaration)
             => Static(declaration.Name, declaration.Namespace, declaration.Properties, declaration.TableSchema, declaration.TableName, declaration.GetTypeId(), declaration.GetKeyString());

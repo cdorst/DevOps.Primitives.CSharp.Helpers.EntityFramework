@@ -14,20 +14,29 @@ namespace DevOps.Primitives.CSharp.Helpers.EntityFramework
             int typeId)
             => @class
                 .WithBase(IEntity, TypeArgumentLists.Create(keyType))
-                .WithMethods(
-                    GetEntityType(typeId),
-                    GetKey(keyType, $"{@class.Identifier.Name.Value}Id"))
+                .AddIEntityMethods(keyType, typeId)
                 .WithUsingDirective(DevOpsCodeEntityModelCommonInterfacesEntity);
 
         public static ClassDeclaration ImplementIStaticEntity(
             this ClassDeclaration @class,
             string keyType,
+            int typeId,
             IEnumerable<EntityProperty> properties)
             => @class
                 .WithSingleBaseType(IStaticEntity, TypeArgumentLists.Create(keyType))
-                .WithMethod(GetUniqueIndex(@class.Identifier.Name.Value, properties))
+                .AddIEntityMethods(keyType, typeId)
+                .WithMethods(GetUniqueIndex(@class.Identifier.Name.Value, properties))
                 .WithUsings(
                     EntityUsings.System,
                     SystemLinqExpressions);
+
+        private static ClassDeclaration AddIEntityMethods(
+            this ClassDeclaration @class,
+            string keyType,
+            int typeId)
+            => @class
+                .WithMethods(
+                    GetEntityType(typeId),
+                    GetKey(keyType, $"{@class.Identifier.Name.Value}Id"));
     }
 }
